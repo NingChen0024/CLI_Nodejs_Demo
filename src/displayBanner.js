@@ -15,8 +15,8 @@ function displayBanner () {
   table.push(
     ['ecommerce --products', 'Check all the products you can buy'],
     ['ecommerce --myCart', 'View your shopping cart'],
-    ['ecommerce --addProducts', 'Adding products to the shopping cart'],
-    ['ecommerce --removeProducts', 'Removing products from theShopping cart']
+    ['ecommerce --add', 'Adding products to the shopping cart'],
+    ['ecommerce --remove', 'Removing items from the Shopping cart']
   )
   clear()
   console.log(chalk.magenta(figlet.textSync('Welcome', { horizontalLayout: 'full' })))

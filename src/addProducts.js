@@ -12,8 +12,8 @@ function findItem (obj, list) {
   return null
 }
 
-// this function display all commands
-// that can be used
+// this function overwite the JSON file with a new
+// product that users choosed
 async function addProducts () {
   const products = require('./products.json')
   const items = require('./shoppingCart.json')
@@ -34,7 +34,7 @@ async function addProducts () {
   fs.writeFileSync('src/shoppingCart.json', JSON.stringify(items, null, 4), err => {
     if (err) throw err
   })
-  console.log('The item is added to the shopping cart!')
+  console.log('The item is added successfully!')
 }
 
 export default addProducts

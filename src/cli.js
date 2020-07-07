@@ -1,17 +1,18 @@
 import arg from 'arg'
-import inquirer from 'inquirer'
+import clear from 'clear'
 import displayProducts from './displayProducts'
 import displayMyCart from './displayMyCart'
 import displayBanner from './displayBanner'
 import addProducts from './addProducts'
+import removeItems from './removeItems'
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
     {
       '--products': Boolean,
       '--myCart': Boolean,
-      '--addProducts': Boolean,
-      '--removeProducts': Boolean
+      '--add': Boolean,
+      '--remove': Boolean
     },
     {
       argv: rawArgs.slice(2)
@@ -20,8 +21,8 @@ function parseArgumentsIntoOptions(rawArgs) {
   return {
     list: args['--products'] || false,
     cart: args['--myCart'] || false,
-    add: args['--addProducts'] || false,
-    remove: args['--removeProducts'] || false
+    add: args['--add'] || false,
+    remove: args['--remove'] || false
   }
 }
 
@@ -43,45 +44,26 @@ async function promptForMissingOptions(options) {
   }
 
   // display the product list and allow users
-  // to add product to the shopping cart
+  // to add product to the shopping cart once
+  // the argument is --add
   if (options.add){
     addProducts()
     return{
     }
   }
-
+  // display items in the cart and allow users
+  // to remove it by inputing name and amount
+  // once the argument is --remove
   if (options.remove){
     removeItems()
     return{
     }
   }
 
-  const questions = []
-  if (!options.template) {
-    questions.push({
-      type: 'list',
-      name: 'template',
-      message: 'Please choose which project template to use',
-      choices: ['JavaScript', 'TypeScript'],
-      default: defaultTemplate,
-    })
-  }
-
-  if (!options.git) {
-    questions.push({
-      type: 'confirm',
-      name: 'git',
-      message: 'Initialize a git respository?',
-      default: false,
-    })
-  }
-
-  const answers = await inquirer.prompt(questions)
   clear()
+  displayBanner()
   return {
-    ...options,
-    template: options.template || answers.template,
-    git: options.git || answers.git,
+    ...options
   }
 }
 
@@ -89,5 +71,4 @@ export async function cli(args) {
   displayBanner()
   let options = parseArgumentsIntoOptions(args)
   options = await promptForMissingOptions(options)
-  
 }
