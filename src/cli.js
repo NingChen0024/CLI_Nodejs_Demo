@@ -3,14 +3,11 @@ import inquirer from 'inquirer'
 import displayProducts from './displayProducts'
 import displayMyCart from './displayMyCart'
 import displayBanner from './displayBanner'
+import addProducts from './addProducts'
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
     {
-      // '--git': Boolean,
-      // '--yes': Boolean,
-      // '-g': '--git',
-      // '-y': '--yes'
       '--products': Boolean,
       '--myCart': Boolean,
       '--addProducts': Boolean,
@@ -21,10 +18,6 @@ function parseArgumentsIntoOptions(rawArgs) {
     }
   )
   return {
-    // skipPrompts: args['--yes'] || false,
-    // git: args['--git'] || false,
-    // template: args._[0],
-    // runInstall: args['--install'] || false
     list: args['--products'] || false,
     cart: args['--myCart'] || false,
     add: args['--addProducts'] || false,
@@ -38,8 +31,6 @@ async function promptForMissingOptions(options) {
   if (options.list) {
     displayProducts()
     return {
-      // ...options,
-      // template: options.template || defaultTemplate
     }
   }
 
@@ -48,6 +39,20 @@ async function promptForMissingOptions(options) {
   if (options.cart){
     displayMyCart()
     return {
+    }
+  }
+
+  // display the product list and allow users
+  // to add product to the shopping cart
+  if (options.add){
+    addProducts()
+    return{
+    }
+  }
+
+  if (options.remove){
+    removeItems()
+    return{
     }
   }
 
@@ -81,16 +86,8 @@ async function promptForMissingOptions(options) {
 }
 
 export async function cli(args) {
-  
   displayBanner()
   let options = parseArgumentsIntoOptions(args)
   options = await promptForMissingOptions(options)
-  console.log(options)
-
-
-  // let rawdata = fs.readFileSync('products.json')
-  // let products = JSON.parse(rawdata)
-  // console.log(products)
-
-
+  
 }

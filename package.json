@@ -1,0 +1,32 @@
+{
+  "name": "ecommance_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ecommerce": "./bin/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "cli",
+    "create-project"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "arg": "^4.1.3",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "cli-table": "^0.3.1",
+    "esm": "^3.2.25",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.3.0",
+    "ncp": "^2.0.0",
+    "standard": "^14.3.4"
+  }
+}

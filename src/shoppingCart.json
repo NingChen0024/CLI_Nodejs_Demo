@@ -1,12 +1,14 @@
 [
-  { 
-    "name": "Apple",
-    "price": 4.95
-  },{
-    "name": "Orange",
-    "price": 3.99
-  },{ 
-    "name": "Apple",
-    "price": 4.95
-  }
+    {
+        "name": "Apple",
+        "price": 4.95
+    },
+    {
+        "name": "Orange",
+        "price": 3.99
+    },
+    {
+        "name": "Apple",
+        "price": 4.95
+    }
 ]
