@@ -5,5 +5,8 @@
   },{
     "name": "Orange",
     "price": 3.99
+  },{
+    "name": "Strawberry",
+    "price": 4.5
   }
 ]

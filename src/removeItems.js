@@ -18,8 +18,11 @@ function findItem (obj, list) {
 async function removeItems () {
   displayMyCart()
   const items = require('./shoppingCart.json')
+  // access unique item names from the shopping cart
   const uniqueNameSet = new Set(items.map(item => item.name))
   const uniqueName = Array.from(uniqueNameSet)
+  // add prompt questionx to get item name and amount
+  // that the user wants to remove
   const questions = []
   questions.push({
     type: 'list',
@@ -33,6 +36,9 @@ async function removeItems () {
     message: 'Please input the amount!',
     default: 1
   })
+  // remove two items that have the name the user
+  // choose, and the remove action runs untill
+  // the amount of items are deleted
   const answers = await inquirer.prompt(questions)
   const item = findItem(answers, items)
   for (var i = 0; i < answers.amount; i++) {
@@ -42,9 +48,6 @@ async function removeItems () {
         break
       }
     }
-    // remove two items that have the name the user
-    // choose, and the remove action runs untill
-    // the amount of items are deleted
   }
   fs.writeFileSync('src/shoppingCart.json', JSON.stringify(items, null, 4), err => {
     if (err) throw err

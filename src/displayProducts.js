@@ -7,7 +7,7 @@ function displayProducts () {
   var table = new Table({
     style: { head: ['green'] },
     head: ['Item', 'Price'],
-    colWidths: [10, 10]
+    colWidths: [20, 10]
   })
   products.map(product =>
     table.push(

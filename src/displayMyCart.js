@@ -1,4 +1,4 @@
-import Table from 'cli-table'
+// import Table from 'cli-table'
 
 // Iterate through the item list to see
 // if the new item is already in the list
@@ -25,11 +25,14 @@ function incrementAmount (obj, list) {
 }
 
 // this function display all products that
-// are able in the shopping cart
-function displayProducts () {
+// are able to be added to the shopping cart
+module.exports = function displayProducts () {
+  const Table = require('cli-table')
   var totalPrice = 0
   var itemsInCart = []
   const items = require('./shoppingCart.json')
+  // reduce duplicatded items and add certain amount of the items
+  // into the cart based on the number of duplication
   items.map(item => {
     if (containsItem(item, itemsInCart)) {
       itemsInCart = incrementAmount(item, itemsInCart)
@@ -39,6 +42,7 @@ function displayProducts () {
     }
     totalPrice = totalPrice + item.price
   })
+  // create a table for displaying
   var table = new Table({
     head: ['Item', 'Price', 'Amount'],
     colWidths: [10, 10, 10]
@@ -50,6 +54,5 @@ function displayProducts () {
   )
   console.log(table.toString())
   console.log('               Total Price: ' + totalPrice)
+  return totalPrice
 }
-
-export default displayProducts

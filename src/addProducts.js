@@ -19,7 +19,7 @@ async function addProducts () {
   const items = require('./shoppingCart.json')
   const questions = []
   var productNames = []
-
+  // add prompt questions to get item name from users
   products.map(product => productNames.push(product.name))
   questions.push({
     type: 'list',
@@ -29,6 +29,7 @@ async function addProducts () {
     default: 'Apple'
   })
   const answers = await inquirer.prompt(questions)
+  // write the new item to the array and update the JSON file
   const newItem = findItem(answers, products)
   items.push(newItem)
   fs.writeFileSync('src/shoppingCart.json', JSON.stringify(items, null, 4), err => {

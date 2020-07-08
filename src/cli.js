@@ -6,7 +6,9 @@ import displayBanner from './displayBanner'
 import addProducts from './addProducts'
 import removeItems from './removeItems'
 
-function parseArgumentsIntoOptions(rawArgs) {
+// define all commend that users can use
+// to interact with the program
+function parseArgumentsIntoOptions (rawArgs) {
   const args = arg(
     {
       '--products': Boolean,
@@ -26,49 +28,41 @@ function parseArgumentsIntoOptions(rawArgs) {
   }
 }
 
-async function promptForMissingOptions(options) {
-  
+async function promptForOptions (options) {
   // display products once the argument key is --products
   if (options.list) {
     displayProducts()
-    return {
-    }
+    return
   }
 
   // display products in the cart and total price
   // once the argument is --myCart
-  if (options.cart){
+  if (options.cart) {
     displayMyCart()
-    return {
-    }
+    return
   }
 
   // display the product list and allow users
   // to add product to the shopping cart once
   // the argument is --add
-  if (options.add){
+  if (options.add) {
     addProducts()
-    return{
-    }
+    return
   }
   // display items in the cart and allow users
   // to remove it by inputing name and amount
   // once the argument is --remove
-  if (options.remove){
+  if (options.remove) {
     removeItems()
-    return{
-    }
+    return
   }
-
   clear()
   displayBanner()
-  return {
-    ...options
-  }
 }
 
-export async function cli(args) {
+// this function accept options and pass it to the prompts
+export async function cli (args) {
   displayBanner()
-  let options = parseArgumentsIntoOptions(args)
-  options = await promptForMissingOptions(options)
+  const options = parseArgumentsIntoOptions(args)
+  await promptForOptions(options)
 }
